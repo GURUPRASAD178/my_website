@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company.name }} Members</title>
+</head>
+<body>
+    <h1>Members of {{ company.name }}</h1>
+    <a href="{{ url_for('add_member', company_id=company.id) }}">Add Member</a>
+    <ul>
+        {% for member in company.members %}
+        <li>
+            <img src="{{ url_for('static', filename='images/' ~ member.photo) }}" alt="{{ member.name }}">
+            {{ member.name }} - {{ member.payment_status }} - ${{ member.amount / 100 }}
+            <a href="{{ url_for('delete_member', member_id=member.id) }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to Companies</a>
+</body>
+</html>
